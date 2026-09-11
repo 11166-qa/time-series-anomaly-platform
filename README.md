@@ -1,5 +1,11 @@
 # Multivariate Time Series Forecasting and Anomaly Detection Platform
 
+
+![Python](https://img.shields.io/badge/Python-3.10-blue)
+![PyTorch](https://img.shields.io/badge/PyTorch-2.x-red)
+![License](https://img.shields.io/badge/license-MIT-green)
+![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20CUDA-orange)
+
 ## Overview
 
 A deep learning based platform for multivariate time series forecasting
