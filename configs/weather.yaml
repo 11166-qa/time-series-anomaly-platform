@@ -1,0 +1,38 @@
+dataset:
+  name: Weather
+  data_dir: data/processed/Weather
+
+
+model:
+  name: iTransformer
+
+  lookback: 336
+  pred_len: 24
+
+  d_model: 64
+  nhead: 4
+  num_layers: 2
+  dim_feedforward: 128
+
+  hidden_size: 32
+  dropout: 0.1
+
+
+training:
+  batch_size: 128
+
+  learning_rate: 0.001
+
+  weight_decay: 0.0001
+
+  max_epochs: 30
+
+  early_stopping_patience: 8
+
+  grad_clip: 1.0
+
+  seed: 42
+
+
+output:
+  result_dir: results/Weather/iTransformer/product
