@@ -88,6 +88,40 @@ Dataset:
   iTransformer     0.9876   37.00    9.73
 
 The iTransformer achieved the best forecasting performance.
+---
+
+## Visualization
+
+
+### Forecasting Performance
+
+
+The forecasting results of iTransformer are compared with the ground truth.
+
+
+![Prediction Result](docs/prediction_vs_true.png)
+
+
+
+### Residual Analysis
+
+
+Prediction residuals are analyzed to identify abnormal time points.
+
+
+![Residual Analysis](docs/residual_curve.png)
+
+
+
+### Anomaly Detection
+
+
+Abnormal timestamps are detected based on residual thresholds.
+
+
+![Anomaly Detection](docs/anomaly_detection.png)
+
+---
 
 ## Pipeline
 
