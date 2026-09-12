@@ -80,13 +80,34 @@ def main():
         args.checkpoint
     ).parent
 
+    # 判断输入数据是否为真实时间序列
 
+    if "date" in pd.read_csv(args.input, nrows=1).columns:
+        input_df = pd.read_csv(
+            args.input,
+            nrows=1
+        )
+
+        original_date = input_df["date"].iloc[0]
+
+    # 工业数据使用采样索引
+    if str(original_date).isdigit():
+
+        time_column = "sample_index"
+
+        timestamps = range(
+            len(result["target"])
+        )
+
+    else:
+
+        time_column = "date"
 
     pred_df = pd.DataFrame({
 
-        "date":
+        time_column:
 
-            result["timestamps"],
+            timestamps,
 
         "target":
 
@@ -119,10 +140,9 @@ def main():
 
     )
 
-
     residual_df = pred_df[
         [
-            "date",
+            time_column,
             "residual"
         ]
     ]

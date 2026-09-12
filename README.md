@@ -1,152 +1,131 @@
 # Multivariate Time Series Forecasting and Anomaly Detection Platform
 
+A deep learning framework for multivariate time series forecasting and
+industrial anomaly analysis.
 
-![Python](https://img.shields.io/badge/Python-3.10-blue)
-![PyTorch](https://img.shields.io/badge/PyTorch-2.x-red)
-![License](https://img.shields.io/badge/license-MIT-green)
-![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20CUDA-orange)
+## Project Overview
 
-## Overview
+This project develops a deep learning based framework for multivariate
+time series forecasting and anomaly detection.
 
-A deep learning based platform for multivariate time series forecasting
-and anomaly detection.
+The framework integrates data preprocessing, deep learning model
+training, forecasting evaluation, residual analysis and anomaly
+detection.
 
-This project provides a complete pipeline including model training,
-prediction, evaluation, residual analysis, anomaly detection and
-visualization.
+Besides benchmark time series datasets, industrial monitoring scenarios
+are further investigated using equipment predictive maintenance and
+industrial process monitoring datasets.
 
-Supported models:
-
--   LSTM
--   Transformer
--   iTransformer
+------------------------------------------------------------------------
 
 ## Features
 
-### Multivariate Time Series Forecasting
+-   Multivariate time series forecasting framework
+-   LSTM, Transformer and iTransformer implementations
+-   Forecasting evaluation with R², RMSE and MAE
+-   Residual-based anomaly detection:
+    -   3-Sigma
+    -   IQR
+    -   Isolation Forest
+-   Industrial monitoring case studies
 
-The platform supports:
+------------------------------------------------------------------------
 
-  Model          Description
-  -------------- ---------------------------------------------------
-  LSTM           Recurrent neural network baseline
-  Transformer    Attention-based forecasting model
-  iTransformer   Inverted Transformer for multivariate forecasting
+## Datasets
 
-### Model Evaluation
+### Benchmark Datasets
 
-Metrics:
+-   ETTh1
+-   Electricity
 
--   R²
--   RMSE
--   MAE
--   MAPE
+### Industrial Monitoring Datasets
 
-### Residual-based Anomaly Detection
+#### AI4I Predictive Maintenance Dataset
 
-Residual definition:
+Industrial equipment condition monitoring scenario.
 
-    Residual = |y - y_pred|
+Variables include: - Air temperature - Process temperature - Rotational
+speed - Torque - Tool wear
 
-Implemented methods:
+Tasks: - Equipment state forecasting - Failure anomaly detection
 
--   3σ statistical threshold
--   IQR rule
--   Isolation Forest
+#### Tennessee Eastman Process (TEP)
 
-### Visualization
+Industrial process monitoring scenario with multivariate process
+variables under normal and faulty conditions.
 
-Generated results:
+Tasks: - Normal process forecasting - Fault anomaly detection
 
--   Prediction vs True curve
--   Residual curve with threshold
--   Anomaly detection visualization
+------------------------------------------------------------------------
 
-## Project Structure
+## Models
 
-    time-series-anomaly-platform
+### LSTM
 
-    ├── configs
-    ├── datasets
-    ├── models
-    ├── trainers
-    ├── inference
-    ├── evaluation
-    ├── anomaly
-    ├── visualization
-    ├── train.py
-    ├── predict.py
-    ├── postprocess.py
-    ├── detect_anomaly.py
-    ├── requirements.txt
-    └── README.md
+Recurrent neural network baseline for sequential modeling.
 
-## Experiment Results
+### Transformer
 
-Dataset:
+Attention-based sequence modeling architecture.
 
--   Weather
+### iTransformer
 
-  Model                R²    RMSE     MAE
-  -------------- -------- ------- -------
-  LSTM             0.9513   73.27   24.20
-  Transformer      0.9803   46.59   15.57
-  iTransformer     0.9876   37.00    9.73
+Transformer variant designed for multivariate time series forecasting by
+modeling variable relationships.
 
-The iTransformer achieved the best forecasting performance.
----
+------------------------------------------------------------------------
+
+## Industrial Case Studies
+
+### AI4I Predictive Maintenance
+
+Forecasting Performance:
+
+  Model          R²      RMSE    MAE
+  -------------- ------- ------- -------
+  LSTM           0.639   37.79   15.50
+  Transformer    0.621   38.73   16.39
+  iTransformer   0.599   39.86   18.76
+
+Residual analysis is further used for failure anomaly detection.
+
+------------------------------------------------------------------------
+
+### Tennessee Eastman Process Monitoring
+
+Normal forecasting performance:
+
+  Model          R²      RMSE    MAE
+  -------------- ------- ------- -------
+  LSTM           0.617   0.298   0.180
+  Transformer    0.623   0.296   0.183
+  iTransformer   0.707   0.261   0.117
+
+iTransformer achieves the best performance in modeling complex
+industrial multivariate dynamics.
+
+Fault detection is performed using forecasting residuals and anomaly
+detection methods.
+
+------------------------------------------------------------------------
 
 ## Visualization
 
+Industrial visualization includes:
 
-### Forecasting Performance
+-   Sensor trend analysis
+-   Forecasting comparison
+-   Residual analysis
+-   Fault anomaly detection
 
+Figures are stored in:
 
-The forecasting results of iTransformer are compared with the ground truth.
+    results/AI4I/figures/
+    results/TEP/figures/
 
+------------------------------------------------------------------------
 
-![Prediction Result](docs/prediction_vs_true.png)
-
-
-
-### Residual Analysis
-
-
-Prediction residuals are analyzed to identify abnormal time points.
-
-
-![Residual Analysis](docs/residual_curve.png)
-
-
-
-### Anomaly Detection
-
-
-Abnormal timestamps are detected based on residual thresholds.
-
-
-![Anomaly Detection](docs/anomaly_detection.png)
-
----
-
-## Pipeline
-
-    Dataset
-       |
-    Data preprocessing
-       |
-    Forecasting Models
-    (LSTM / Transformer / iTransformer)
-       |
-    Prediction
-       |
-    Residual Calculation
-       |
-    Anomaly Detection
-       |
-    Visualization
-
-## Quick Start
+## Usage
 
 Install dependencies:
 
@@ -157,50 +136,25 @@ pip install -r requirements.txt
 Train:
 
 ``` bash
-python train.py --config configs/weather.yaml
+python train.py --config configs/tep_itransformer.yaml
 ```
 
-Prediction:
+Predict:
 
 ``` bash
-python predict.py
+python predict.py --checkpoint path/to/model.pt --input path/to/test.csv --scaler path/to/scaler.joblib
 ```
 
-Evaluation:
+Evaluate:
 
 ``` bash
-python -m evaluation.evaluate
+python -m evaluation.evaluate_tep
 ```
 
-Anomaly detection:
+------------------------------------------------------------------------
 
-``` bash
-python detect_anomaly.py
-```
+## Future Work
 
-Visualization:
-
-``` bash
-python -m visualization.plot_results
-```
-
-## Environment
-
--   Python 3.10+
--   PyTorch 2.x
--   CUDA supported GPU
-
-## Dataset
-
-Required files:
-
-    data/processed/Weather/
-
-    ├── train.csv
-    ├── val.csv
-    ├── test.csv
-    └── scaler.joblib
-
-## License
-
-MIT License
+-   More industrial datasets
+-   Advanced anomaly detection methods
+-   Real-time monitoring deployment

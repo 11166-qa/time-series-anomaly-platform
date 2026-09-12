@@ -1,0 +1,37 @@
+dataset:
+  name: AI4I
+  data_dir: data/processed/AI4I
+
+
+model:
+  name: LSTM
+
+  lookback: 96
+  pred_len: 12
+
+  hidden_size: 32
+  num_layers: 1
+
+  dropout: 0.1
+
+
+training:
+
+  batch_size: 64
+
+  learning_rate: 0.001
+
+  weight_decay: 0.0001
+
+  max_epochs: 30
+
+  early_stopping_patience: 8
+
+  grad_clip: 1.0
+
+  seed: 42
+
+
+output:
+
+  result_dir: results/AI4I/LSTM/case_study

@@ -39,7 +39,17 @@ env/
 # Generated results
 # =====================
 
+# Ignore experiment results
 results/*/
+
+# Keep visualization figures for README
+!results/AI4I/
+!results/AI4I/figures/
+!results/AI4I/figures/*.png
+
+!results/TEP/
+!results/TEP/figures/
+!results/TEP/figures/*.png
 
 # 保留目录结构
 !results/.gitkeep
