@@ -8,21 +8,31 @@ industrial anomaly analysis.
 This project develops a deep learning based framework for multivariate
 time series forecasting and anomaly detection.
 
-The framework integrates data preprocessing, deep learning model
-training, forecasting evaluation, residual analysis and anomaly
-detection.
+The framework integrates:
+
+-   Data preprocessing
+-   Deep learning model training
+-   Forecasting evaluation
+-   Residual analysis
+-   Anomaly detection
 
 Besides benchmark time series datasets, industrial monitoring scenarios
-are further investigated using equipment predictive maintenance and
-industrial process monitoring datasets.
+are investigated using equipment predictive maintenance and industrial
+process monitoring datasets.
 
 ------------------------------------------------------------------------
 
-## Features
+# Features
 
--   Multivariate time series forecasting framework
--   LSTM, Transformer and iTransformer implementations
--   Forecasting evaluation with R², RMSE and MAE
+-   Unified multivariate time series forecasting framework
+-   Multiple deep learning models:
+    -   LSTM
+    -   Transformer
+    -   iTransformer
+-   Forecasting evaluation:
+    -   R²
+    -   RMSE
+    -   MAE
 -   Residual-based anomaly detection:
     -   3-Sigma
     -   IQR
@@ -31,53 +41,97 @@ industrial process monitoring datasets.
 
 ------------------------------------------------------------------------
 
-## Datasets
+# Project Structure
 
-### Benchmark Datasets
+``` text
+time-series-anomaly-platform
 
--   ETTh1
--   Electricity
+├── configs
+├── data
+├── datasets
+├── models
+├── trainers
+├── preprocessing
+├── evaluation
+├── visualization
+├── anomaly
+├── results
+│
+├── train.py
+├── predict.py
+├── requirements.txt
+└── README.md
+```
 
-### Industrial Monitoring Datasets
+------------------------------------------------------------------------
 
-#### AI4I Predictive Maintenance Dataset
+# Datasets
+
+## Benchmark Datasets
+
+### ETTh1
+
+Transformer temperature forecasting dataset.
+
+### Electricity
+
+Multivariate electricity consumption forecasting dataset.
+
+------------------------------------------------------------------------
+
+## Industrial Monitoring Datasets
+
+## AI4I Predictive Maintenance Dataset
 
 Industrial equipment condition monitoring scenario.
 
-Variables include: - Air temperature - Process temperature - Rotational
-speed - Torque - Tool wear
+Variables include:
 
-Tasks: - Equipment state forecasting - Failure anomaly detection
+-   Air temperature
+-   Process temperature
+-   Rotational speed
+-   Torque
+-   Tool wear
 
-#### Tennessee Eastman Process (TEP)
+Tasks:
 
-Industrial process monitoring scenario with multivariate process
-variables under normal and faulty conditions.
+-   Equipment state forecasting
+-   Failure anomaly detection
 
-Tasks: - Normal process forecasting - Fault anomaly detection
+## Tennessee Eastman Process (TEP)
+
+Industrial process monitoring scenario.
+
+The dataset contains multivariate process variables under normal and
+faulty operating conditions.
+
+Tasks:
+
+-   Normal process forecasting
+-   Fault anomaly detection
 
 ------------------------------------------------------------------------
 
-## Models
+# Models
 
-### LSTM
+## LSTM
 
 Recurrent neural network baseline for sequential modeling.
 
-### Transformer
+## Transformer
 
 Attention-based sequence modeling architecture.
 
-### iTransformer
+## iTransformer
 
-Transformer variant designed for multivariate time series forecasting by
-modeling variable relationships.
+A Transformer variant designed for multivariate time series forecasting
+by modeling variable relationships.
 
 ------------------------------------------------------------------------
 
-## Industrial Case Studies
+# Industrial Case Studies
 
-### AI4I Predictive Maintenance
+## AI4I Predictive Maintenance
 
 Forecasting Performance:
 
@@ -91,9 +145,9 @@ Residual analysis is further used for failure anomaly detection.
 
 ------------------------------------------------------------------------
 
-### Tennessee Eastman Process Monitoring
+## Tennessee Eastman Process Monitoring
 
-Normal forecasting performance:
+Normal process forecasting performance:
 
   Model          R²      RMSE    MAE
   -------------- ------- ------- -------
@@ -109,23 +163,42 @@ detection methods.
 
 ------------------------------------------------------------------------
 
-## Visualization
+# Visualization
 
-Industrial visualization includes:
+## AI4I Industrial Equipment Monitoring
 
--   Sensor trend analysis
--   Forecasting comparison
--   Residual analysis
--   Fault anomaly detection
+### Sensor Trend Analysis
 
-Figures are stored in:
+![AI4I Sensor Trends](results/AI4I/figures/AI4I_sensor_trends.png)
 
-    results/AI4I/figures/
-    results/TEP/figures/
+### Equipment State Forecasting
+
+![AI4I Prediction](results/AI4I/figures/AI4I_prediction_LSTM.png)
+
+### Failure Detection
+
+![AI4I Failure
+Detection](results/AI4I/figures/AI4I_failure_detection.png)
 
 ------------------------------------------------------------------------
 
-## Usage
+## Tennessee Eastman Process (TEP) Industrial Process Monitoring
+
+### Normal Process Forecasting
+
+![TEP Prediction](results/TEP/figures/TEP_prediction_iTransformer.png)
+
+### Fault Residual Analysis
+
+![TEP Residual](results/TEP/figures/TEP_fault_residual.png)
+
+### Fault Anomaly Detection
+
+![TEP Anomaly Detection](results/TEP/figures/TEP_anomaly_detection.png)
+
+------------------------------------------------------------------------
+
+# Usage
 
 Install dependencies:
 
@@ -133,19 +206,19 @@ Install dependencies:
 pip install -r requirements.txt
 ```
 
-Train:
+Train model:
 
 ``` bash
 python train.py --config configs/tep_itransformer.yaml
 ```
 
-Predict:
+Prediction:
 
 ``` bash
 python predict.py --checkpoint path/to/model.pt --input path/to/test.csv --scaler path/to/scaler.joblib
 ```
 
-Evaluate:
+Evaluation:
 
 ``` bash
 python -m evaluation.evaluate_tep
@@ -153,7 +226,7 @@ python -m evaluation.evaluate_tep
 
 ------------------------------------------------------------------------
 
-## Future Work
+# Future Work
 
 -   More industrial datasets
 -   Advanced anomaly detection methods
